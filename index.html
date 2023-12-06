@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGU Management and Operations System</title>
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="dist/css/sweetalert2.min.css">
+    <link rel="stylesheet" href="dist/fontawesome/css/all.css">    
+    <link rel="stylesheet" href="dist/css/login.css">
+    <script src="dist/js/jquery.min.js"></script>
+    <script src="dist/js/js.cookie.min.js"></script>
+    <script src="dist/js/jquery.redirect.js"></script>
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dist/js/sweetalert2.all.min.js"></script>
+    <script src="dist/fontawesome/js/all.js"></script>
+    <script>document.write("<script type='text/javascript' src='lock.js?time=" + Date.now() + "'><\/script>");</script>
+    <script>document.write("<script type='text/javascript' src='login.js?time=" + Date.now() + "'><\/script>");</script>
+  
+</head>
+<body>    
+    <div class="container">	        
+        <div class="card shadow-lg bg-body-tertiary rounded position-absolute top-50 start-50 translate-middle" style="width:60%;">
+            <div id="lockstatus"></div>
+            <div class="card-body">
+                <div class="row p-4">
+                    <div class="col-7">
+                        <div class="position-relative top-50 start-50 translate-middle">
+                            <div class="d-flex justify-content-center">                           
+                                <div>                                    
+                                    <h3 class="text-center"><span class="text-primary text-heading">LMOS</span></h3>
+                                    <div class="mx-auto"> 
+                                        <form id="login_form">
+                                            <div class="input-group mb-1 input-group-lg mb-2">                        
+                                                <input type="text" class="form-control" aria-label="Sizing example input" id="user" name="username" aria-describedby="inputGroup-sizing-default" autocomplete="off" required disabled>
+                                                <span class="input-group-text credential-icon" id="inputGroup-sizing-default" ><i class="fa-solid fa-user"></i></span>
+                                            </div>
+                                            <div class="input-group mb-1 input-group-lg mb-2">                        
+                                                <input type="password" class="form-control" aria-label="Sizing example input" id="password" name="password" aria-describedby="inputGroup-sizing-default" autocomplete="off" required disabled>
+                                                <span class="input-group-text credential-icon" id="inputGroup-sizing-default"><i class="fa-solid fa-key"></i></span>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" value="" id="see_password">
+                                                <label class="form-check-label" for="flexCheckIndeterminate">
+                                                    See Password
+                                                </label>
+                                            </div> 
+                                        </form>                                                                                                                     
+                                    </div>                                         
+                                    <div class="row g-1 mb-2">
+                                        <div class="col">
+                                            <button class="btn btn-success form-control" onclick="window.location.href='register.php'"><i class="fa fa-plus-square" aria-hidden="true"></i> &nbsp;Create New</button>
+                                        </div>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary form-control" onclick="$('#login_form').submit()"><i class="fa-solid fa-users"></i> &nbsp;Log In</button>
+                                        </div>
+                                    </div>
+                                    <div class="row g-1">
+                                        <div class="col">
+                                            <button class="btn btn-danger text-white form-control" onclick="window.location.href='que_system/index.php'"><i class="fa-solid fa-list-ol"></i> QUE</button>
+                                        </div>                                        
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>                                                
+                    </div>
+                    <div class="col">                        
+                        <div class="position-relative top-50 start-50 translate-middle">
+                            <div class="d-flex justify-content-center">                           
+                                <div>                                    
+                                    <img src="dist/images/alcoy.png" alt="" width="200" height="200">    
+                                </div>
+                            </div>
+                        </div>                                                         
+                    </div>                 
+                </div>
+            </div>
+        </div>                
+    </div>
+    		
+
+</body>
+</html>

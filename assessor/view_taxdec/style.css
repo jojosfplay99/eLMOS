@@ -1,0 +1,68 @@
+
+/*
+#card_preview{    
+    width: 29.7cm;
+    height: 21cm;  
+}
+*/
+.title{
+    font-family:'Times New Roman', Times, serif;
+    font-size:18px;
+    margin-top: 10px;
+    border:solid 1xp;
+}
+
+.title2{
+    font-family:'Times New Roman', Times, serif;
+    font-size:12px;
+    margin-top: 10px;
+}
+
+.sub{
+    font-family:Arial, sans-serif;
+    font-weight:bolder;
+    font-size:22px;    
+}
+
+.sub2{
+    font-family:Arial, sans-serif;
+    font-weight:bolder;
+    font-size:20px;    
+}
+/*-------*/
+
+
+@media print{
+    
+    .no_print{
+        display: none;
+    }
+    
+    #card_preview{
+        margin:auto;
+        width: 29.7cm;
+        height: 21cm;
+        transform: scale(.1);
+        -webkit-transform: scale(.1);
+        -moz-transform: scale(.1);
+        -ms-transform: scale(.1);
+        -o-transform: scale(.1);
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    #taxdec_info{
+        border:solid 1xp;
+        width: 30cm;
+        height: 21cm;
+        transform: scale(.8);
+        -webkit-transform: scale(.8);
+        -moz-transform: scale(.8);
+        -ms-transform: scale(.8);
+        -o-transform: scale(.8);
+    }
+}
+

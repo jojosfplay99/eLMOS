@@ -1,0 +1,11 @@
+.no_print{
+    display: none;
+}
+#card_preview{
+    size: a4 portrait;
+}
+.span1{
+    font-family:Arial, sans-serif;
+    font-weight:bolder;
+    font-size:20px;    
+}
