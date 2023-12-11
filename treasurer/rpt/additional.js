@@ -578,5 +578,40 @@ $(document).ready(function(){
             }
         }); 
     })
+
+    ///
+
+    $( '#payor_listing_modal' ).select2( {
+        theme: "bootstrap-5",
+        width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+        placeholder: $( this ).data( 'placeholder' ),                
+        //dropdownParent: $('#rpt_modal'),
+        allowClear: true,
+        selectionCssClass: 'select2--large',
+        dropdownCssClass: 'select2--large',
+        ajax: {
+            url: "rpt/payor_listing.php",
+            type: "post",
+            dataType: 'json',
+            delay: 250,
+                data: function (params) {
+                return {
+                        searchTerm: params.term, // search term                                
+                    };
+                },
+                processResults: function (response) {
+                    return {
+                        results: response
+                    };
+                },                        
+        } 
+    }).on('select2:select', function(event) {
+        var additional = event.params.data;
+       
+    }).on('select2:clear', function(event) {
+        
+    });
+
+
 })
 

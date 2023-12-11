@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col">
               <div class="mb-3">
-                <select class="large-select2-options-single-field" id="add_subclass_select" name="propertyid" data-placeholder="Choose Classification" required></select>
+                <select class="large-select2-options-single-field" id="add_subclass_select" name="propertyid" data-placeholder="Choose Property" required></select>
               </div>
             </div>            
           </div>

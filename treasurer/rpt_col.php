@@ -110,6 +110,9 @@
                 </div>
               </div>
             </div> 
+            <div class="mb-3">
+              <select class="large-select2-options-single-field" id="payor_listing_modal" name="payor" data-placeholder="Choose Classification" required></select>
+            </div>
             <div>
               <table class="table table-bordered table-stripped" id="rpt_table2" style="font-size:12px;width:100%;">
                 <thead>
