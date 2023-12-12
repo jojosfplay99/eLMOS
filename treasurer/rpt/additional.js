@@ -3,6 +3,9 @@ $(document).ready(function(){
     var transaction_code = $('#transaction_code').val();
     var or_id = $('#or_id').val();
     $('#clerkid').val(cookie_id)
+    $('#clerkid1').val(cookie_id)
+    $('#clerkid2').val(cookie_id)
+    $('#clerkid3').val(cookie_id)
     $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-primary';
     const myTimeout = setTimeout(myGreeting, 1000);
 
@@ -142,11 +145,11 @@ $(document).ready(function(){
                 targets: 15,
                 render: function ( data, type, row, meta ) {                    
                     if(data == 'PENDING'){
-                        return '<button class="btn btn-danger btn-sm btn-squared">PENDING</button>';
+                        return '<button class="btn btn-danger btn-sm btn-squared">PENDING1</button>';
                     }else if(data == 'PAID'){
                         return '<button class="btn btn-primary btn-sm btn-squared">PAID</button>';
-                    }else if(data == 'IN TRANSACTION'){
-                        return '<button class="btn btn-warning btn-sm btn-squared">IN TRANSACTION</button>';
+                    }else if(data == 'WAITING'){
+                        return '<button class="btn btn-warning btn-sm btn-squared">WAITING</button>';
                     }
                 }
             },
@@ -278,16 +281,33 @@ $(document).ready(function(){
                     type: "POST",
                     url: "rpt/add_payment.php",
                     data:$(this).serialize(),
-                    success: function (data) {                                              
-                        Swal.fire({
-                            icon: "success",
-                            title: "Success!",
-                            text: "Successfully Deleted!",
-                            timer: 3000,
-                        }).then(function(){
-                            //window.location.reload(true)
-                            $('#rpt_payment_modal').modal('hide')
-                        });
+                    success: function (data) {  
+                        if(data == 0){
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success!",
+                                text: "Successfully Added!",
+                                timer: 3000,
+                            }).then(function(){
+                                //window.location.reload(true)
+                                table1.ajax.reload()
+                                table2.ajax.reload()
+                                $('#rpt_payment_modal').modal('hide')
+                            });
+                        }else{
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error!",
+                                text: "Payment Exist!",
+                                timer: 3000,
+                            }).then(function(){
+                                //window.location.reload(true)
+                                table1.ajax.reload()
+                                table2.ajax.reload()
+                                $('#rpt_payment_modal').modal('hide')
+                            });
+                        }
+                        
                 
                     },                                        
                 });
@@ -550,33 +570,47 @@ $(document).ready(function(){
 
     $('#payment_btn').on('click', function(e){
         e.preventDefault();
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Do you want to Finalize this payment?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Pay It!"
-            }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "POST",
-                    url: "rpt/payment.php",
-                    data:{transaction_code:transaction_code,clerkid:cookie_id},
-                    success: function (data) {                                                
-                        Swal.fire({
-                            icon: "success",
-                            title: "Success!",
-                            text: "Successfully Deleted!",
-                            timer: 3000,
-                        }).then(function(){
-                           window.location.href="rcd_rpt.php" 
-                        });                        
-                    },                                        
-                });
-            }
-        }); 
+        var payor = $('#payor_listing_modal').val();
+        
+        if(payor == null){
+            Swal.fire({
+                icon: "warning",
+                title: "No Payor!",
+                text: "Please choose Payor!",
+                timer: 3000,
+            }).then(function(){
+            //window.location.href="rcd_rpt.php" 
+            });
+        }else{
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you want to Finalize this payment?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Pay It!"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: "rpt/payment.php",
+                        data:{transaction_code:transaction_code,clerkid:cookie_id,payor:payor},
+                        success: function (data) {                                                
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success!",
+                                text: "Successfully Deleted!",
+                                timer: 3000,
+                            }).then(function(){
+                                window.location.href="rcd_rpt.php" 
+                            });                        
+                        },                                        
+                    });
+                }
+            }); 
+        }   
+         
     })
 
     ///
@@ -589,6 +623,21 @@ $(document).ready(function(){
         allowClear: true,
         selectionCssClass: 'select2--large',
         dropdownCssClass: 'select2--large',
+        tags:true,
+        createTag: function(params) {
+            var term = $.trim(params.term);
+            
+            if (term === '') {
+                return null;
+                
+            }
+
+            return {
+                id: term,
+                text: term,
+                newTag: true
+            };
+        },
         ajax: {
             url: "rpt/payor_listing.php",
             type: "post",
@@ -603,14 +652,84 @@ $(document).ready(function(){
                     return {
                         results: response
                     };
-                },                        
-        } 
+                }, 
+            cache: true                       
+        },        
     }).on('select2:select', function(event) {
         var additional = event.params.data;
-       
-    }).on('select2:clear', function(event) {
-        
     });
+
+    $('#payor_listing_modal').on('select2:select', function (e) {
+      var data = e.params.data;
+
+      // Check if the selected option is a new tag
+      if (data.newTag) {
+        Swal.fire({
+            html: "<h3>Do you want to add <br><span style='font-family: Times New Roman;font-style:italic;'>'"+ data.text +"'</span><br> to Payor Listing?</h3>",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Add It!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "rpt/add_payor.php",
+                    data:{payor:data.text},
+                    success: function (data) {                        
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: "Successfully Added!",
+                            timer: 3000,
+                        }).then(function(){
+                            
+                        });
+                    },                                        
+                });
+            }
+        }); 
+        console.log('New tag created: ' + data.text);
+        // You can perform additional actions here for the new tag
+      }
+    });
+
+   
+    $('#rpt_table2 ').on('click', '.btn-danger', function (e) {
+        var data = table2.row( $(this).parents('tr') ).data();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to Delete this?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Delete It!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "rpt/delete_payment.php",
+                    data:{id:data[0],ass_id:data[17]},
+                    success: function (data) {                                              
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: "Successfully Deleted!",
+                            timer: 3000,
+                        }).then(function(){
+                            //window.location.reload(true)
+                            $('#rpt_payment_modal').modal('hide')
+                            table2.ajax.reload()
+                        });
+                
+                    },                                        
+                });
+            }
+        }); 
+    })
+    
 
 
 })

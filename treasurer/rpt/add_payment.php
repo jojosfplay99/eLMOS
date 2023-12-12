@@ -23,6 +23,15 @@ $additional_penalties = $_POST['additional_penalties'];
 $grand_total_taxdue = $_POST['grand_total_taxdue'];
 $tags = $_POST['tags'];
 
-mysqli_query($con,"INSERT INTO `rpt_computation` (`transaction_code`, `ornumber`, `propertyid`, `taxdec`, `taxyear`, `total_assessedvalue`, `taxdue`, `basic`, `sef`, `penalties`, `discount`,  `penalty_add`, `total`, `clerkid`, `date_paid`, `compute_code`, `assessment_id`, `payment`, `status`) VALUES ('$transaction_code', '$ornum', '$propertyid', '$tdno', '$taxyear', '$assessedvalue', '$total_taxdue', '$basic', '$sef', '$penalty', '$discount', '$additional_penalties',  '$grand_total_taxdue', '$clerkid', NULL, '$compute_code', '$id', '$tags', 'WAITING')") or die(mysqli_error($con));
+$query = mysqli_query($con,"SELECT * FROM rpt_computation WHERE assessment_id LIKE '$id'");
+if(mysqli_num_rows($query) == '0'){
+    mysqli_query($con,"INSERT INTO `rpt_computation` (`transaction_code`, `ornumber`, `propertyid`, `taxdec`, `taxyear`, `total_assessedvalue`, `taxdue`, `basic`, `sef`, `penalties`, `discount`,  `penalty_add`, `total`, `clerkid`, `date_paid`, `compute_code`, `assessment_id`, `payment`, `status`) VALUES ('$transaction_code', '$ornum', '$propertyid', '$tdno', '$taxyear', '$assessedvalue', '$total_taxdue', '$basic', '$sef', '$penalty', '$discount', '$additional_penalties',  '$grand_total_taxdue', '$clerkid', NULL, '$compute_code', '$id', 'WAITING', '$tags')") or die(mysqli_error($con));
+    mysqli_query($con,"UPDATE rpt_assessment SET status = 'WAITING' where id LIKE '$id'");
+    echo "0";
+}else{
+    echo "1";
+}
+
+
 
 ?>

@@ -7,7 +7,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input type="text" class="form-control" id="clerkid" name="clerkid" placeholder="name@example.com" hidden>          
+          <input type="text" class="form-control" id="clerkid3" name="clerkid" placeholder="name@example.com" hidden>          
           <div class="row">
             <div class="col">
               <div class="mb-3">
@@ -142,7 +142,7 @@
         <div class="modal-body">
           <input type="text" class="form-control" id="clerkid1" name="clerkid" placeholder="name@example.com" readonly hidden>
           <input type="text" class="form-control" id="compute_code1" name="compute_code" placeholder="name@example.com" readonly hidden>
-          <input type="text" class="form-control" id="id1" name="id" placeholder="name@example.com" readonly hidden>
+          <input type="text" class="form-control" id="id1" name="id" placeholder="name@example.com" readonly>
           <div class="row">
             <div class="col-4">
               <div class="col">
@@ -156,7 +156,7 @@
           <div class="row">          
             <div class="col">
               <div class="form-floating mb-3">                
-                <input type="text" class="form-control" id="clerkid1" name="clerkid" placeholder="name@example.com" readonly>
+                <input type="text" class="form-control" id="clerkid2" name="clerkid" placeholder="name@example.com" readonly>
                 <label for="floatingInput">CLERKID ID</label>
               </div>
             </div>

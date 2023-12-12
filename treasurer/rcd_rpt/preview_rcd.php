@@ -125,7 +125,8 @@ $number = cal_days_in_month(CAL_GREGORIAN,$date_month,$date_year);
               <th>COMPUTE CODE</th>
               <th>ASSESSMENT ID</th>
               <th>PAYMENT</th>
-              <th>STATUS</th>                    
+              <th>STATUS</th> 
+              <th>PAYOR</th>                   
             </tr>
           </thead>                           
         </table>

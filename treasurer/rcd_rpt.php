@@ -70,6 +70,7 @@
               <th>ASSESSMENT ID</th>
               <th>PAYMENT</th>
               <th>STATUS</th>                    
+              <th>PAYOR</th>                    
               <th width="10%">ACTION</th>
             </tr>
           </thead>                           

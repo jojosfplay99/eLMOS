@@ -56,6 +56,7 @@ $columns = array(
     array( 'db' => 'assessment_id', 'dt' => 17),
     array( 'db' => 'payment', 'dt' => 18),
     array( 'db' => 'status', 'dt' => 19),
+    array( 'db' => 'payor', 'dt' => 20),
 );
  
  
