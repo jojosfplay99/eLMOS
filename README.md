@@ -1,1 +1,1 @@
-# LMOS_2
+# LGU Management and Operations System
