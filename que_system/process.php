@@ -1,6 +1,6 @@
 <?php
 $office = $_POST['office'];
-$con = mysqli_connect('localhost','root','','lmos');
+$con = mysqli_connect('sql210.infinityfree.com','if0_35611025','8BQQaTAQCJ','if0_35611025_lmos');
 $date_now = date('Y-m-d');
 
 //$query = mysqli_query($con,"SELECT * FROM que_treasurer WHERE date_sched = '$date_sched'");
