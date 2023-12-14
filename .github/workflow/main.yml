@@ -17,6 +17,7 @@ jobs:
         server: ftp.infinityfree.com
         username: if0_35611025
         password: 8BQQaTAQCJ
+        port: 21
         protocol: ftp
         server-dir: /htdocs/lmos/
         
