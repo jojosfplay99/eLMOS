@@ -1,17 +1,20 @@
 on: push
-name: 🚀 Deploy website on push
+  name: Deploy website on push
+  branches: main
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
+    - name: Get latest code
       uses: actions/checkout@v3
+        with:
+        fetch-depth: 2
     
-    - name: 📂 Sync files
+    - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ftp.infinityfree.com
-        username: if0_35611025
-        password: ${{ secrets.ftp_password }}
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
         server-dir: /htdocs/lmos/
