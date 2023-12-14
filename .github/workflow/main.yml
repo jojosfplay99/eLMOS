@@ -17,5 +17,6 @@ jobs:
         server: ftp.infinityfree.com
         username: if0_35611025
         password: 8BQQaTAQCJ
+        protocol: ftp
         server-dir: htdocs/
         
